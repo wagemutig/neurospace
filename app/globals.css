@@ -1,0 +1,354 @@
+/*
+ * Tokens from docs/design-system/tokens.json. Change a value there first,
+ * then here. Screens use these variables, never raw hex values.
+ */
+:root {
+  --paper: #fbf8f3;
+  --surface: #ffffff;
+  --ink: #1f2a22;
+  --ink-muted: #5a655c;
+  --line: #e6dfd2;
+  --tint: #f3efe7;
+  --on-bright: #1f2a22;
+
+  --pulse: #6fc08f;
+  --pulse-ink: #2d7a4f;
+  --breath: #7fd0d6;
+  --balance: #7d9fd9;
+  --reach: #ef8f7e;
+  --ground: #f4b860;
+  --rest: #a998de;
+
+  --caution: #9a4a00;
+  --caution-bg: #f7e6d4;
+
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 48px;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121a16;
+    --surface: #1c2620;
+    --ink: #f1ede4;
+    --ink-muted: #a9b5aa;
+    --line: #2a3730;
+    --tint: #18221c;
+    --pulse-ink: #7fd1a0;
+    --caution: #ffb27a;
+    --caution-bg: #3a2a1c;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #121a16;
+  --surface: #1c2620;
+  --ink: #f1ede4;
+  --ink-muted: #a9b5aa;
+  --line: #2a3730;
+  --tint: #18221c;
+  --pulse-ink: #7fd1a0;
+  --caution: #ffb27a;
+  --caution-bg: #3a2a1c;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.02;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: var(--pulse-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--pulse-ink);
+  outline-offset: 3px;
+}
+
+/* Screen shell: a phone-width column that centres on larger screens. */
+.screen {
+  position: relative;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 120px;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3) 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lead {
+  padding: var(--space-3) var(--space-3) 0;
+}
+
+.lead h1 {
+  font-size: 40px;
+}
+
+.sheet {
+  margin-top: auto;
+  background: var(--surface);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-3) var(--space-2) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.muted {
+  color: var(--ink-muted);
+}
+
+.zone-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  align-self: flex-start;
+  padding: 6px 14px 6px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--on-bright);
+}
+
+.zone-chip svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding-inline: var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--on-bright);
+  background: var(--pulse);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.round {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  flex: none;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--pulse);
+  color: var(--on-bright);
+  cursor: pointer;
+}
+
+.round svg {
+  width: 26px;
+  height: 26px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+/* Week view on Today: seven days, the done ones filled in pulse. */
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.day i {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+
+.day.done i {
+  background: var(--pulse);
+  box-shadow: none;
+}
+
+.day.today {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.day.today i {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+/* Exercise timer: a soft shape that drains as the time runs out. */
+.timer {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto;
+}
+
+.timer svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.timer-value {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 56px;
+}
+
+.timer-controls {
+  width: 100%;
+  padding-inline: 20px;
+}
+
+/* Progress: one labelled bar per zone. */
+.bar-row {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.bar-label {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.track {
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  overflow: hidden;
+}
+
+.track b {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+}
+
+.val {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bottom tab bar, fixed to the phone column. */
+.tabs {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-2);
+  transform: translateX(-50%);
+  width: min(448px, calc(100% - 32px));
+  height: 64px;
+  z-index: 10;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tabs a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  color: inherit;
+}
+
+.tabs a[aria-current="page"] {
+  background: var(--pulse);
+  color: var(--on-bright);
+}
+
+.tabs svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
