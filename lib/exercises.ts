@@ -23,10 +23,10 @@ export const exercises: Exercise[] = [
   },
   {
     id: "fuesse-spueren",
-    title: "Füße spüren",
+    title: "Füsse spüren",
     zone: "balance",
     seconds: 45,
-    body: "Stell dich hin. Spür die Füße am Boden. Wenn du wackelst, halte dich fest.",
+    body: "Stell dich hin. Spür die Füsse am Boden. Wenn du wackelst, halte dich fest.",
   },
   {
     id: "hand-oeffnen",
