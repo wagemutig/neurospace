@@ -1,17 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["700", "800"],
+// Self-hosted (SIL Open Font License): loads with the app, no request to Google at build time.
+const display = localFont({
+  src: "./fonts/BricolageGrotesque-Latin.woff2",
+  weight: "700 800",
   variable: "--font-bricolage",
   display: "swap",
 });
 
-const sans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+const sans = localFont({
+  src: "./fonts/DMSans-Latin.woff2",
+  weight: "400 700",
   variable: "--font-dm-sans",
   display: "swap",
 });
@@ -34,7 +35,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="de" className={`${display.variable} ${sans.variable}`}>
+    <html lang="de-CH" className={`${display.variable} ${sans.variable}`}>
       <body>{children}</body>
     </html>
   );
