@@ -5,7 +5,8 @@ import { Button, ButtonLink } from "@/components/Button";
 import { Buddy, type Mood } from "@/components/Buddy";
 import { ZoneChip } from "@/components/ZoneChip";
 import type { Exercise } from "@/lib/exercises";
-import { addSession } from "@/lib/progress";
+import { addSession, isSameDay } from "@/lib/progress";
+import { useSessions } from "@/lib/useSessions";
 import { levelOf, requestMotionAccess, startMotion, type Level, type Snapshot } from "@/lib/sensing";
 import { zones } from "@/lib/zones";
 
@@ -156,6 +157,13 @@ export function ExerciseSession({ exercise, position, total, nextHref }: Props) 
     strongSinceRef.current = null;
   }
 
+  // Today's count, in the same form as the saved sessions: each exercise counts once.
+  const sessions = useSessions();
+  const today = new Date();
+  const doneToday = new Set(
+    sessions.filter((session) => isSameDay(new Date(session.completedAt), today)).map((session) => session.exerciseId),
+  ).size;
+
   const minutes = Math.floor(remaining / 60);
   const seconds = String(remaining % 60).padStart(2, "0");
   const mood: Mood = finished ? "happy" : live && running ? MOOD[level] : "calm";
@@ -224,6 +232,9 @@ export function ExerciseSession({ exercise, position, total, nextHref }: Props) 
         <>
           <p className="muted" style={{ textAlign: "center", margin: "24px 28px 0" }}>
             Schön, dass du dabei warst.
+          </p>
+          <p style={{ textAlign: "center", margin: "8px 28px 0", fontWeight: 700 }}>
+            {doneToday} von {total} heute erledigt.
           </p>
           <div className="controls timer-controls" style={{ marginTop: 24 }}>
             <Button variant="surface" onClick={reset}>
