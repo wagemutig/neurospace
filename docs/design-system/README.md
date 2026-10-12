@@ -103,6 +103,12 @@ black and white.
 - Design dark mode alongside light, not afterwards.
 - Write the German first, then translate once it reads naturally.
 
+## First screens
+
+Three first mockups (Today, one exercise, Progress), in light mode: [`mockups/first-screens.html`](mockups/first-screens.html) and the preview below.
+
+![First screens: Today, one exercise, Progress](mockups/first-screens.png)
+
 ## Still open
 
 - The logo. The dot and tail is an idea, not a drawing yet.
