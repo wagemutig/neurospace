@@ -1,0 +1,164 @@
+<title>neurospace first screens</title>
+<meta name="description" content="Three first app screens in the neurospace design system: Today, one exercise, and Progress.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+  /* Layout: three phone screens side by side, stacking on narrow viewports. Full-bleed colour
+     headers, large rounded sheets, a big round play button and a bottom tab bar, as in Headspace;
+     our tokens, pebble shapes and German copy. */
+  :root {
+    --paper: #fbf8f3; --surface: #ffffff; --ink: #1f2a22; --ink-muted: #5a655c; --line: #e6dfd2;
+    --pulse: #6fc08f; --pulse-ink: #2d7a4f; --breath: #7fd0d6; --balance: #7d9fd9; --reach: #ef8f7e;
+    --ground: #f4b860; --rest: #a998de; --caution-bg: #f7e6d4; --caution: #9a4a00; --on-bright: #1f2a22; --tint: #f3efe7;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #121a16; --surface: #1c2620; --ink: #f1ede4; --ink-muted: #a9b5aa; --line: #2a3730;
+      --pulse-ink: #7fd1a0; --caution-bg: #3a2a1c; --caution: #ffb27a; --tint: #18221c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #121a16; --surface: #1c2620; --ink: #f1ede4; --ink-muted: #a9b5aa; --line: #2a3730;
+    --pulse-ink: #7fd1a0; --caution-bg: #3a2a1c; --caution: #ffb27a; --tint: #18221c; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.45 "DM Sans", system-ui, sans-serif; }
+  .wrap { padding-block: 32px; padding-inline: 16px; }
+  .intro { max-width: 60ch; margin: 0 0 32px; color: var(--ink-muted); }
+  .screens { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .phone { position: relative; width: 100%; height: 700px; border-radius: 44px; overflow: hidden; background: var(--surface); display: flex; flex-direction: column; box-shadow: inset 0 0 0 1px var(--line); }
+  .shot { margin: 0; display: flex; flex-direction: column; gap: 12px; width: 340px; max-width: 100%; }
+  .screen-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
+  .status { position: relative; z-index: 2; display: flex; justify-content: space-between; padding: 16px 24px 0; font-size: 13px; font-weight: 700; }
+  h1, h2, .display { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; margin: 0; line-height: 1.02; text-wrap: balance; }
+  .muted { color: var(--ink-muted); margin: 0; }
+  .hero { position: absolute; inset: 0 0 auto 0; height: 360px; z-index: 0; }
+  .lead { position: relative; z-index: 2; padding: 28px 24px 0; }
+  .sheet { position: relative; z-index: 1; margin-top: auto; background: var(--surface); border-radius: 32px 32px 0 0; padding: 26px 20px 110px; display: flex; flex-direction: column; gap: 16px; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding-inline: 24px; border: 0; border-radius: 999px; font: 700 16px "DM Sans", system-ui, sans-serif; color: var(--on-bright); background: var(--pulse); }
+  .round { display: grid; place-items: center; width: 72px; height: 72px; border: 0; border-radius: 999px; background: var(--pulse); color: var(--on-bright); flex: none; }
+  .round svg { width: 26px; height: 26px; }
+  .tabs { position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 4; height: 64px; border-radius: 999px; background: var(--ink); color: var(--paper); display: flex; justify-content: space-around; align-items: center; }
+  .tabs span { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; }
+  .tabs span.on { background: var(--pulse); color: var(--on-bright); }
+  .tabs svg { width: 22px; height: 22px; }
+  .zone-chip { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 6px 14px 6px 10px; border-radius: 999px; font-size: 14px; font-weight: 700; color: var(--on-bright); }
+  .zone-chip svg { width: 16px; height: 16px; }
+  .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .day { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-muted); min-width: 0; }
+  .day i { display: block; width: 30px; height: 30px; border-radius: 999px; box-shadow: inset 0 0 0 2px var(--line); }
+  .day.done i { background: var(--pulse); box-shadow: none; }
+  .day.today { color: var(--ink); font-weight: 700; }
+  .day.today i { box-shadow: inset 0 0 0 2px var(--ink); }
+  .bar-row { display: grid; grid-template-columns: 34px 1fr 24px; align-items: center; gap: 12px; }
+  .bar-row .dot { width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center; color: var(--on-bright); }
+  .bar-row .dot svg { width: 16px; height: 16px; }
+  .bar-row .track { height: 12px; border-radius: 999px; background: var(--line); overflow: hidden; }
+  .bar-row .track b { display: block; height: 100%; border-radius: 999px; }
+  .bar-row .val { font-size: 13px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+  .note { align-self: center; padding: 10px 16px; border-radius: 999px; background: var(--caution-bg); color: var(--caution); font-size: 13px; font-weight: 500; text-align: center; }
+  .controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .step { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; font-size: 30px; line-height: 1.05; margin: 0; text-wrap: balance; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <p class="intro">Three first screens, rebuilt closer to Headspace's structure: full-bleed colour at the top, large rounded sheets, a big round play button and a bottom tab bar. The palette, pebble shapes and German copy stay ours.</p>
+
+  <div class="screens">
+
+    <!-- 1. Today -->
+    <figure class="shot"><figcaption class="screen-label">1 · Heute</figcaption><section class="phone" aria-label="Heute">
+      <div class="hero" style="background: var(--tint)"></div>
+      <div class="status" style="color: var(--ink)"><span>9:41</span><span>●●●</span></div>
+      <div class="lead" style="color: var(--ink)">
+        <h1 style="font-size:40px">Guten Morgen,<br>Anna.</h1>
+        <p style="margin:12px 0 0">Heute: Gleichgewicht. Etwa zehn Minuten.</p>
+      </div>
+      <svg viewBox="0 0 200 200" aria-hidden="true" style="position:absolute; right:-44px; top:186px; width:230px; z-index:1">
+        <path d="M 100 14 C 140 14 186 46 188 100 C 190 152 152 188 100 188 C 48 188 12 152 14 100 C 16 48 60 14 100 14 Z" fill="var(--pulse)"/>
+      </svg>
+      <div class="sheet">
+        <span class="zone-chip" style="background: var(--balance)"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>Gleichgewicht</span>
+        <div class="controls">
+          <div>
+            <h2 style="font-size:24px">Gewicht verlagern</h2>
+            <p class="muted" style="font-size:14px">10 Minuten · im Stehen</p>
+          </div>
+          <button class="round" type="button" aria-label="Starten">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M 8 5.5 Q 7 5 7 6.2 L 7 17.8 Q 7 19 8 18.5 L 18.5 12.7 Q 19.3 12 18.5 11.3 Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="days" role="list">
+          <div class="day done" role="listitem"><i></i>Mo</div>
+          <div class="day done" role="listitem"><i></i>Di</div>
+          <div class="day" role="listitem"><i></i>Mi</div>
+          <div class="day done" role="listitem"><i></i>Do</div>
+          <div class="day" role="listitem"><i></i>Fr</div>
+          <div class="day today" role="listitem"><i></i>Sa</div>
+          <div class="day" role="listitem"><i></i>So</div>
+        </div>
+      </div>
+      <nav class="tabs" aria-hidden="true">
+        <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 L12 4 L20 11 V20 H4 Z"/></svg></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20 V12 M12 20 V6 M19 20 V14"/></svg></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21 C5 16 19 16 20 21"/></svg></span>
+      </nav>
+    </section></figure>
+
+    <!-- 2. One exercise -->
+    <figure class="shot"><figcaption class="screen-label">2 · Übung</figcaption><section class="phone" aria-label="Übung" style="background: var(--tint)">
+      <div class="status" style="color: var(--ink)"><span>9:41</span><span>●●●</span></div>
+      <div style="position:relative; z-index:2; display:flex; justify-content:space-between; align-items:center; padding: 12px 20px 0">
+        <button class="round" type="button" aria-label="Schließen" style="width:44px; height:44px; background: var(--surface); color: var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="width:18px; height:18px"><path d="M6 6 L18 18 M18 6 L6 18"/></svg></button>
+        <span class="zone-chip" style="background: var(--surface)">2 von 4</span>
+      </div>
+      <div style="position:relative; z-index:2; padding: 28px 24px 0; color: var(--ink)">
+        <p class="step">Stell dich hin. Spür die Füße am Boden.</p>
+      </div>
+      <div style="position:relative; z-index:2; margin: 28px auto 0; width: 240px; height: 240px">
+        <svg viewBox="0 0 240 240" aria-hidden="true" style="width:240px; height:240px; display:block">
+          <defs><clipPath id="top-half"><rect x="0" y="0" width="240" height="120"/></clipPath></defs>
+          <path d="M 120 20 C 168 20 222 56 224 118 C 226 180 186 222 120 222 C 58 222 16 184 18 116 C 20 56 72 20 120 20 Z" fill="var(--surface)"/>
+          <path d="M 120 20 C 168 20 222 56 224 118 C 226 180 186 222 120 222 C 58 222 16 184 18 116 C 20 56 72 20 120 20 Z" fill="var(--balance)" clip-path="url(#top-half)"/>
+        </svg>
+        <span class="display" style="position:absolute; inset:0; display:grid; place-items:center; font-size:56px; color: var(--ink)">0:45</span>
+      </div>
+      <p style="position:relative; z-index:2; text-align:center; margin: 24px 28px 0; color: var(--ink)">Atme ruhig. Wenn du wackelst, halte dich fest.</p>
+      <div style="position:absolute; left:0; right:0; bottom:0; z-index:2; padding: 0 20px 96px; display:flex; flex-direction:column; gap:16px; align-items:center">
+        <span class="note" style="background: var(--surface); color: var(--ink)">Unsicher? Sprich vorher mit deiner Therapeutin.</span>
+        <div class="controls" style="width:100%">
+          <button class="round" type="button" aria-label="Pause" style="background: var(--ink); color: var(--paper)"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="5.5" width="3.6" height="13" rx="1.8"/><rect x="13.4" y="5.5" width="3.6" height="13" rx="1.8"/></svg></button>
+          <button class="pill" type="button" style="flex:1; background: var(--surface); color: var(--ink)">Weiter</button>
+        </div>
+      </div>
+    </section></figure>
+
+    <!-- 3. Progress -->
+    <figure class="shot"><figcaption class="screen-label">3 · Verlauf</figcaption><section class="phone" aria-label="Verlauf">
+      <div class="hero" style="height: 300px; background: var(--tint)"></div>
+      <div class="status" style="color: var(--ink)"><span>9:41</span><span>●●●</span></div>
+      <div class="lead" style="color: var(--ink)">
+        <h1 style="font-size:36px">Da bist du wieder.</h1>
+        <p style="margin:14px 0 0">Drei Tage diese Woche.</p>
+        <p class="display" style="margin:18px 0 0; font-size:56px; line-height:1">14 <span style="font-size:20px; font-weight:700">Min</span></p>
+      </div>
+      <div class="sheet" style="padding-top:28px">
+        <h2 style="font-size:20px">Zonen, letzte 14 Tage</h2>
+        <div class="bar-row"><span class="dot" style="background: var(--breath)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/></svg></span><span class="track"><b style="width:55%; background: var(--breath)"></b></span><span class="val">3</span></div>
+        <div class="bar-row"><span class="dot" style="background: var(--balance)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg></span><span class="track"><b style="width:100%; background: var(--balance)"></b></span><span class="val">6</span></div>
+        <div class="bar-row"><span class="dot" style="background: var(--reach)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9 Q8 2 13 9"/></svg></span><span class="track"><b style="width:35%; background: var(--reach)"></b></span><span class="val">2</span></div>
+        <div class="bar-row"><span class="dot" style="background: var(--ground)"><svg viewBox="0 0 16 16" fill="currentColor"><ellipse cx="8" cy="11" rx="4.5" ry="2.5"/><circle cx="8" cy="5" r="2"/></svg></span><span class="track"><b style="width:70%; background: var(--ground)"></b></span><span class="val">4</span></div>
+        <div class="bar-row"><span class="dot" style="background: var(--rest)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M10 2 A6 6 0 1 0 14 10 A5 5 0 0 1 10 2 Z"/></svg></span><span class="track"><b style="width:18%; background: var(--rest)"></b></span><span class="val">1</span></div>
+      </div>
+      <nav class="tabs" aria-hidden="true">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 L12 4 L20 11 V20 H4 Z"/></svg></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20 V12 M12 20 V6 M19 20 V14"/></svg></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21 C5 16 19 16 20 21"/></svg></span>
+      </nav>
+    </section></figure>
+
+  </div>
+</div>
