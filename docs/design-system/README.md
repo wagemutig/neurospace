@@ -60,7 +60,7 @@ Dark mode is a deep forest rather than black, with the same zone colours.
 
 ## Type
 
-Two families, both free Google fonts, not yet self-hosted. **Bricolage Grotesque** is for headings and
+Two families, both free Google fonts (SIL Open Font License), self-hosted in `app/fonts/`. **Bricolage Grotesque** is for headings and
 the wordmark: a little uneven at heavy weights, friendly rather than polished. **DM Sans** is for
 everything else, round and easy to read at small sizes.
 
@@ -112,7 +112,6 @@ Three first mockups (Today, one exercise, Progress), in light mode: [`mockups/fi
 ## Still open
 
 - The logo. The dot and tail is an idea, not a drawing yet.
-- Font files for Bricolage Grotesque and DM Sans.
 - A colour-vision check of the zones with a simulator.
 - Icons, illustration and photography direction.
 - Motion tokens. Durations are described here but not yet in the tokens.
