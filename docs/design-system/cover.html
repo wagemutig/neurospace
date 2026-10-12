@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=DM+Sans:wght@500&display=swap">
+<style>
+  html, body { margin: 0; background: var(--paper); }
+  body { width: 960px; height: 360px; overflow: hidden; }
+  svg { display: block; }
+  .paper { fill: var(--paper); }
+  .pulse { fill: var(--pulse); }
+  .reach { fill: var(--reach); }
+  .rest { fill: var(--rest); }
+  .ground-line { fill: none; stroke: var(--ground); stroke-width: 8; stroke-linecap: round; }
+  .ground { fill: var(--ground); }
+  .name { fill: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; font-size: 72px; }
+  .tag { fill: var(--ink-muted); font-family: "DM Sans", system-ui, sans-serif; font-weight: 500; font-size: 15px; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-label="neurospace">
+  <!--
+    Shapes: imperfect circles, drawn as smooth closed curves with a small radius jitter (+/-8%), the
+    way a hand-cut or hand-drawn circle is uneven, and the way Headspace's own dot is not quite round.
+    pulse (--pulse): the large pebble, about 270 across, centre (760, 170).
+    reach (--reach): a smaller pebble, about 105 across, centre (560, 292), touching nothing.
+    rest (--rest): a soft capsule (ellipse, rotated -12 degrees) resting on the bottom right.
+    ground (--ground): the brand's dot and tail, the one signal, as a short curve leaving the dot.
+    Composition: loose and unequal, with breathing room between shapes; nothing aligned to a grid.
+    Name: 72px Bricolage Grotesque 800, bottom-left, ink, inside the 440px zone.
+  -->
+  <rect class="paper" x="0" y="0" width="960" height="360"/>
+
+  <path class="pulse" d="M 760.0 42.0 C 788.5 42.8 821.1 65.4 843.3 86.7 C 865.5 108.1 892.5 141.6 893.1 170.0 C 893.7 198.4 869.1 235.1 846.9 256.9 C 824.7 278.6 788.1 301.5 760.0 300.6 C 731.9 299.7 700.9 273.2 678.5 251.5 C 656.1 229.7 626.7 198.2 625.6 170.0 C 624.5 141.8 649.8 103.5 672.2 82.2 C 694.6 60.9 731.5 41.2 760.0 42.0 Z"/>
+  <path class="reach" d="M 560.0 240.0 C 576.1 239.9 601.6 251.2 608.6 263.9 C 615.7 276.7 610.4 302.9 602.3 316.4 C 594.2 330.0 574.3 344.9 560.0 345.0 C 545.7 345.2 524.3 330.7 516.3 317.2 C 508.4 303.8 505.0 277.3 512.3 264.4 C 519.5 251.6 543.9 240.1 560.0 240.0 Z"/>
+  <ellipse class="rest" cx="872" cy="320" rx="72" ry="34" transform="rotate(-12 872 320)"/>
+  <path class="ground-line" d="M 590 60 Q 548 30 500 44"/>
+  <path class="ground" d="M 610.0 42.0 C 617.1 42.0 631.1 56.5 631.1 64.0 C 631.1 71.5 617.1 86.9 610.0 86.9 C 602.9 86.9 588.4 71.5 588.4 64.0 C 588.4 56.5 602.9 42.0 610.0 42.0 Z"/>
+
+  <text class="name" x="48" y="300">neurospace</text>
+  <text class="tag" x="48" y="332">Dein Körper. Wieder deiner.</text>
+</svg>
+</body>
+</html>
