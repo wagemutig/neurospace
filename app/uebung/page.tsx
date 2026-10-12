@@ -54,7 +54,7 @@ export default function ExercisePage() {
         Atme ruhig. Wenn du wackelst, halte dich fest.
       </p>
 
-      <div style={{ margin: "auto 20px 120px", display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}>
+      <div style={{ margin: "24px 20px 120px", display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}>
         <span
           className="note"
           style={{

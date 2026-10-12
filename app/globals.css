@@ -120,6 +120,7 @@ a {
   display: flex;
   flex-direction: column;
   padding-bottom: 120px;
+  overflow: hidden;
 }
 
 .status {
@@ -136,6 +137,17 @@ a {
 
 .lead h1 {
   font-size: 40px;
+}
+
+/* The soft green pebble on Today, behind the greeting and to the right. */
+.pebble {
+  position: absolute;
+  right: -44px;
+  top: 186px;
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .sheet {

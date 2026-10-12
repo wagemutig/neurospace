@@ -1,11 +1,13 @@
 import { TabBar } from "@/components/TabBar";
+import { zones, type ZoneId } from "@/lib/zones";
 
-const zones = [
-  { label: "Atem", color: "var(--breath)", value: 3, width: 55 },
-  { label: "Gleichgewicht", color: "var(--balance)", value: 6, width: 100 },
-  { label: "Greifen", color: "var(--reach)", value: 2, width: 35 },
-  { label: "Boden", color: "var(--ground)", value: 4, width: 70 },
-  { label: "Loslassen", color: "var(--rest)", value: 1, width: 18 },
+// Minutes per zone over the last 14 days, as a share of the busiest zone.
+const weeks: { zone: ZoneId; value: number; width: number }[] = [
+  { zone: "breath", value: 3, width: 55 },
+  { zone: "balance", value: 6, width: 100 },
+  { zone: "reach", value: 2, width: 35 },
+  { zone: "ground", value: 4, width: 70 },
+  { zone: "rest", value: 1, width: 18 },
 ];
 
 export default function ProgressPage() {
@@ -26,13 +28,13 @@ export default function ProgressPage() {
 
       <section className="sheet" style={{ paddingTop: 28 }}>
         <h2 style={{ fontSize: 20 }}>Zonen, letzte 14 Tage</h2>
-        {zones.map((zone) => (
-          <div key={zone.label} className="bar-row">
-            <span className="bar-label">{zone.label}</span>
+        {weeks.map(({ zone, value, width }) => (
+          <div key={zone} className="bar-row">
+            <span className="bar-label">{zones[zone].label}</span>
             <span className="track">
-              <b style={{ width: `${zone.width}%`, background: zone.color }} />
+              <b style={{ width: `${width}%`, background: zones[zone].color }} />
             </span>
-            <span className="val">{zone.value}</span>
+            <span className="val">{value}</span>
           </div>
         ))}
       </section>

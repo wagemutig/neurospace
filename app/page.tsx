@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TabBar } from "@/components/TabBar";
+import { ZoneChip } from "@/components/ZoneChip";
 
 const days = [
   { label: "Mo", done: true },
@@ -29,14 +30,19 @@ export default function TodayPage() {
         </p>
       </div>
 
+      <svg
+        className="pebble"
+        viewBox="0 0 200 200"
+        aria-hidden="true"
+      >
+        <path
+          d="M 100 14 C 140 14 186 46 188 100 C 190 152 152 188 100 188 C 48 188 12 152 14 100 C 16 48 60 14 100 14 Z"
+          fill="var(--pulse)"
+        />
+      </svg>
+
       <section className="sheet">
-        <span className="zone-chip" style={{ background: "var(--balance)" }}>
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="8" cy="8" r="2" fill="currentColor" />
-          </svg>
-          Gleichgewicht
-        </span>
+        <ZoneChip zone="balance" />
 
         <div className="controls">
           <div>
