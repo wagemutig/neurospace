@@ -139,15 +139,16 @@ a {
   font-size: 40px;
 }
 
-/* The soft green pebble on Today, behind the greeting and to the right. */
+/* Buddy sits behind the greeting on Today, bleeding off the right edge. */
 .pebble {
   position: absolute;
   right: -44px;
   top: 186px;
-  width: 200px;
-  height: 200px;
   z-index: 1;
-  pointer-events: none;
+}
+
+.pebble .buddy {
+  width: 200px;
 }
 
 .sheet {
@@ -292,26 +293,100 @@ a {
   box-shadow: inset 0 0 0 2px var(--ink);
 }
 
-/* Exercise timer: a soft shape that drains as the time runs out. */
-.timer {
-  position: relative;
-  width: 240px;
-  height: 240px;
-  margin: 0 auto;
+/* Buddy: the friendly shape. During an exercise it is the timer, draining as time runs out. */
+.buddy {
+  --tilt-x: 0px;
+  --tilt-y: 0px;
+  --tilt-r: 0deg;
+  --look-x: 0px;
+  --look-y: 0px;
+  width: 210px;
+  max-width: 62vw;
+  transform: translate(var(--tilt-x), var(--tilt-y)) rotate(var(--tilt-r));
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.timer svg {
-  width: 100%;
-  height: 100%;
+.buddy svg {
   display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
-.timer-value {
+.buddy-body {
+  transform-origin: 50% 90%;
+  animation:
+    bounce-in 700ms var(--ease-spring) both,
+    bob 3.6s ease-in-out 700ms infinite;
+}
+
+.buddy-body.poked {
+  animation:
+    boing 650ms var(--ease-spring) both,
+    bob 3.6s ease-in-out 650ms infinite;
+}
+
+.buddy-fill {
+  transition: clip-path 1s linear, fill 400ms ease;
+}
+
+.eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5.5s ease-in-out infinite;
+}
+
+.pupils {
+  transition: transform 150ms linear;
+  transform: translate(var(--look-x), var(--look-y));
+}
+
+.buddy .mouth,
+.buddy .brows {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.buddy[data-mood="calm"] .mouth-calm,
+.buddy[data-mood="wobbly"] .mouth-wobbly,
+.buddy[data-mood="strong"] .mouth-strong,
+.buddy[data-mood="happy"] .mouth-happy,
+.buddy[data-mood="strong"] .brows {
+  opacity: 1;
+}
+
+.buddy[data-mood="happy"] .buddy-body {
+  animation:
+    bounce-in 600ms var(--ease-spring) both,
+    wiggle 1s ease-in-out 600ms 2;
+}
+
+/* Live feedback text swaps in with a small rise. */
+.feedback {
+  animation: rise 400ms var(--ease-out) both;
+}
+
+/* Confetti bursts out of the middle of the screen when an exercise is done. */
+.confetti {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 56px;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.confetti span {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  animation: confetti 1100ms var(--ease-out) both;
 }
 
 .timer-controls {
@@ -441,9 +516,67 @@ a {
   }
 }
 
-@keyframes breathe {
+/* Buddy's motion: a springy arrival, a slow bob, a boing when poked, a blink and a wiggle. */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bob {
   50% {
-    transform: scale(1.04);
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+@keyframes boing {
+  25% {
+    transform: scale(0.86, 1.12);
+  }
+  50% {
+    transform: scale(1.1, 0.92);
+  }
+  75% {
+    transform: scale(0.98, 1.03);
+  }
+}
+
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes wiggle {
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes confetti {
+  from {
+    opacity: 1;
+    transform: rotate(var(--angle)) translateY(0) scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateY(calc(var(--dist) * -1)) scale(1);
   }
 }
 
@@ -464,7 +597,7 @@ a {
   animation: rise 500ms var(--ease-out) 260ms both;
 }
 
-/* Pebble drifts slowly, like something breathing in the room. */
+/* Buddy on Today drifts slowly, like something breathing in the room. */
 .pebble {
   animation: float 9s ease-in-out infinite;
   transform-origin: center;
@@ -504,15 +637,6 @@ a {
 
 .day i {
   transition: background-color 300ms ease, box-shadow 300ms ease;
-}
-
-/* Timer: the shape drains smoothly and breathes while it runs. */
-.timer svg path:last-child {
-  transition: clip-path 1s linear;
-}
-
-.timer.is-running {
-  animation: breathe 4s ease-in-out infinite;
 }
 
 /* Progress bars grow from the left when the screen opens. */

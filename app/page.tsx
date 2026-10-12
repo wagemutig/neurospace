@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ButtonLink } from "@/components/Button";
+import { Buddy } from "@/components/Buddy";
 import { TabBar } from "@/components/TabBar";
 import { ZoneChip } from "@/components/ZoneChip";
 import { exercises } from "@/lib/exercises";
@@ -49,12 +50,9 @@ export default function TodayPage() {
         </p>
       </div>
 
-      <svg className="pebble" viewBox="0 0 200 200" aria-hidden="true">
-        <path
-          d="M 100 14 C 140 14 186 46 188 100 C 190 152 152 188 100 188 C 48 188 12 152 14 100 C 16 48 60 14 100 14 Z"
-          fill="var(--pulse)"
-        />
-      </svg>
+      <div className="pebble" aria-hidden="true">
+        <Buddy mood="calm" color="var(--pulse)" left={1} />
+      </div>
 
       <section className="sheet">
         {next ? (
