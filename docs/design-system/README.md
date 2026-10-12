@@ -109,9 +109,39 @@ Three first mockups (Today, one exercise, Progress), in light mode: [`mockups/fi
 
 ![First screens: Today, one exercise, Progress](mockups/first-screens.png)
 
+## Naming draft: propria and Homi
+
+A proposal, not a decision. **neurospace** stays the working name until the name is cleared.
+
+**propria** would be the brand, from Latin *proprius*, one's own: your own body, senses and pace.
+Proprioception is the way in, not the whole meaning («Eigenwahrnehmung» in German also means
+self-awareness), so the name leaves room for more than touch and position sense. It is written in
+lowercase, like neurospace. The dot of the i is the mark: the dot with one tail described above.
+
+**Homi** would be the character who guides the exercises. Homi grows out of Buddy
+(`components/Buddy.tsx`): the same pebble, face and green, plus loose hands and feet as a nod to the
+sensory homunculus, the body map in the brain. Hands light up for Greifen, feet for Boden, and the
+whole body takes the zone colour for Atem, Gleichgewicht and Loslassen. On Verlauf, Homi becomes the
+body map: a hand or foot fills up with the person's own weekly ratings. Homi stays soft and round,
+never anatomical. Drawing: [`homi.svg`](homi.svg).
+
+Claim, describing the practice rather than promising a result:
+
+> Dein Körper. Deine Sinne. Dein Tempo. – Ton corps. Tes sens. Ton rythme. – Il tuo corpo. I tuoi sensi. Il tuo ritmo.
+
+The current claim, «Dein Körper. Wieder deiner.», reads as a promise of recovery, which the voice
+section rules out.
+
+Mockup: [`mockups/propria-homi.html`](mockups/propria-homi.html) and the preview below.
+
+![Naming draft: propria wordmark and claim, Homi and its zones, Today and Progress screens, app icons](mockups/propria-homi.png)
+
+Before deciding: a trademark search (Swissreg and EUIPO, classes 9, 10, 41 and 44) and the domains.
+A US biotech called Propria (engineered heart tissue) exists; check it with a trademark lawyer.
+
 ## Still open
 
-- The logo. The dot and tail is an idea, not a drawing yet.
+- The logo. The dot and tail is sketched in the naming draft, but not properly drawn yet.
 - A colour-vision check of the zones with a simulator.
 - Icons, illustration and photography direction.
 - Motion tokens. Durations are described here but not yet in the tokens.
