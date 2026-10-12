@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { signOut } from "@/app/actions";
 import { ButtonLink } from "@/components/Button";
 import { Buddy } from "@/components/Buddy";
 import { TabBar } from "@/components/TabBar";
@@ -11,7 +12,12 @@ import { useSessions } from "@/lib/useSessions";
 
 const dayLabels = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
-export default function TodayPage() {
+type Props = {
+  name: string;
+  signedIn: boolean;
+};
+
+export function TodayScreen({ name, signedIn }: Props) {
   const sessions = useSessions();
   // Read the clock once when the screen opens.
   const [now] = useState(() => new Date());
@@ -39,10 +45,23 @@ export default function TodayPage() {
 
       <div className="lead">
         <h1>
-          Guten Morgen,
-          <br />
-          Anna.
+          {name ? (
+            <>
+              Guten Morgen,
+              <br />
+              {name}.
+            </>
+          ) : (
+            "Schön, dass du da bist."
+          )}
         </h1>
+        {signedIn && (
+          <form action={signOut} style={{ marginTop: 8 }}>
+            <button type="submit" className="muted" style={{ background: "none", border: 0, padding: 0, fontSize: 13, textDecoration: "underline", cursor: "pointer" }}>
+              Abmelden
+            </button>
+          </form>
+        )}
         <p className="muted" style={{ marginTop: 12 }}>
           {next
             ? `Heute: ${exercises.length - doneToday.size} Übungen. Etwa ${remainingMinutes} Minuten.`
