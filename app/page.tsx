@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "@/components/Button";
 import { TabBar } from "@/components/TabBar";
 import { ZoneChip } from "@/components/ZoneChip";
 
@@ -51,7 +51,7 @@ export default function TodayPage() {
               10 Minuten · im Stehen
             </p>
           </div>
-          <Link href="/uebung" className="round" aria-label="Starten">
+          <ButtonLink href="/uebung" shape="round" aria-label="Starten">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M 8 5.5 Q 7 5 7 6.2 L 7 17.8 Q 7 19 8 18.5 L 18.5 12.7 Q 19.3 12 18.5 11.3 Z"
@@ -61,7 +61,7 @@ export default function TodayPage() {
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>
+          </ButtonLink>
         </div>
 
         <div className="days" role="list">

@@ -176,6 +176,12 @@ a {
   color: var(--on-bright);
 }
 
+/* A neutral chip for counts and status. Ink text follows the theme. */
+.chip-surface {
+  background: var(--surface);
+  color: var(--ink);
+}
+
 .zone-chip svg {
   width: 16px;
   height: 16px;
@@ -213,6 +219,31 @@ a {
 .round svg {
   width: 26px;
   height: 26px;
+}
+
+.round-sm {
+  width: 44px;
+  height: 44px;
+}
+
+.round-sm svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-primary {
+  background: var(--pulse);
+  color: var(--on-bright);
+}
+
+.btn-surface {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .controls {

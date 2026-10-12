@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Button } from "@/components/Button";
 
 const TOTAL_SECONDS = 45;
 const OUTLINE =
@@ -40,11 +41,10 @@ export function ExerciseTimer() {
       </div>
 
       <div className="controls timer-controls">
-        <button
-          type="button"
-          className="round"
+        <Button
+          variant="ink"
+          shape="round"
           aria-label={active ? "Pause" : "Weiter"}
-          style={{ background: "var(--ink)", color: "var(--paper)" }}
           onClick={() => setRunning((r) => !r)}
           disabled={remaining === 0}
         >
@@ -64,18 +64,17 @@ export function ExerciseTimer() {
               />
             </svg>
           )}
-        </button>
-        <button
-          type="button"
-          className="pill"
-          style={{ flex: 1, background: "var(--surface)", color: "var(--ink)" }}
+        </Button>
+        <Button
+          variant="surface"
+          style={{ flex: 1 }}
           onClick={() => {
             setRunning(false);
             setRemaining(TOTAL_SECONDS);
           }}
         >
           Neu starten
-        </button>
+        </Button>
       </div>
     </>
   );

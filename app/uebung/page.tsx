@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "@/components/Button";
 import { ExerciseTimer } from "@/components/ExerciseTimer";
 import { TabBar } from "@/components/TabBar";
 
@@ -17,11 +17,11 @@ export default function ExercisePage() {
           padding: "12px 20px 0",
         }}
       >
-        <Link
+        <ButtonLink
           href="/"
-          className="round"
+          shape="round-sm"
+          variant="surface"
           aria-label="Schließen"
-          style={{ width: 44, height: 44, background: "var(--surface)", color: "var(--ink)" }}
         >
           <svg
             viewBox="0 0 24 24"
@@ -34,10 +34,8 @@ export default function ExercisePage() {
           >
             <path d="M6 6 L18 18 M18 6 L6 18" />
           </svg>
-        </Link>
-        <span className="zone-chip" style={{ background: "var(--surface)" }}>
-          2 von 4
-        </span>
+        </ButtonLink>
+        <span className="zone-chip chip-surface">2 von 4</span>
       </div>
 
       <div className="lead" style={{ paddingTop: 28 }}>
