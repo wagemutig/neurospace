@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 0 312 310" role="img" aria-label="Homi">
+  <!-- Homi, draft: Buddy's pebble and face (components/Buddy.tsx) with loose hands (reach) and feet (ground). -->
+  <ellipse cx="24" cy="156" rx="24" ry="30" transform="rotate(-18 24 156)" fill="#ef8f7e"/>
+  <circle cx="38" cy="126" r="9" fill="#ef8f7e"/>
+  <ellipse cx="276" cy="156" rx="24" ry="30" transform="rotate(18 276 156)" fill="#ef8f7e"/>
+  <circle cx="262" cy="126" r="9" fill="#ef8f7e"/>
+  <ellipse cx="114" cy="272" rx="34" ry="17" fill="#f4b860"/>
+  <ellipse cx="186" cy="272" rx="34" ry="17" fill="#f4b860"/>
+  <path d="M 150 40 C 198 40 252 76 254 138 C 256 200 216 242 150 242 C 88 242 46 204 48 136 C 50 76 102 40 150 40 Z" fill="#6fc08f"/>
+  <circle cx="114" cy="132" r="10" fill="#1f2a22"/>
+  <circle cx="186" cy="132" r="10" fill="#1f2a22"/>
+  <circle cx="117" cy="128" r="3" fill="#fbf8f3"/>
+  <circle cx="189" cy="128" r="3" fill="#fbf8f3"/>
+  <circle cx="92" cy="160" r="10" fill="#ef8f7e" opacity="0.45"/>
+  <circle cx="208" cy="160" r="10" fill="#ef8f7e" opacity="0.45"/>
+  <path d="M 124 162 Q 150 196 176 162" stroke="#1f2a22" stroke-width="5" stroke-linecap="round" fill="none"/>
+</svg>

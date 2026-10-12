@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>propria und Homi</title>
+<meta name="description" content="Naming draft in the neurospace design system: the propria wordmark and claim, the Homi character with its zones, two app screens and app icons.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+  /* The repo's self-hosted fonts first, so the page renders offline; Google Fonts above is the fallback. */
+  @font-face { font-family: "Bricolage Grotesque"; src: url("../../../app/fonts/BricolageGrotesque-Latin.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: "DM Sans"; src: url("../../../app/fonts/DMSans-Latin.woff2") format("woff2"); font-weight: 100 1000; font-display: swap; }
+  /* Naming draft: propria as the brand, Homi as the character who guides the exercises.
+     Homi grows out of Buddy (components/Buddy.tsx): same pebble, face and green, plus loose
+     hands and feet as a nod to the sensory homunculus. Tokens as in tokens.json. */
+  :root {
+    --paper: #fbf8f3; --surface: #ffffff; --ink: #1f2a22; --ink-muted: #5a655c; --line: #e6dfd2;
+    --pulse: #6fc08f; --pulse-ink: #2d7a4f; --breath: #7fd0d6; --balance: #7d9fd9; --reach: #ef8f7e;
+    --ground: #f4b860; --rest: #a998de; --on-bright: #1f2a22; --tint: #f3efe7;
+    --forest: #121a16; --forest-ink: #f1ede4; --forest-muted: #a9b5aa;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #121a16; --surface: #1c2620; --ink: #f1ede4; --ink-muted: #a9b5aa; --line: #2a3730;
+      --pulse-ink: #7fd1a0; --tint: #18221c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #121a16; --surface: #1c2620; --ink: #f1ede4; --ink-muted: #a9b5aa; --line: #2a3730;
+    --pulse-ink: #7fd1a0; --tint: #18221c; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 "DM Sans", system-ui, sans-serif; }
+  h1, h2, h3, .display { font-family: "Bricolage Grotesque", system-ui, sans-serif; margin: 0; line-height: 1.02; text-wrap: balance; }
+  p { margin: 0; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 16px 64px; display: flex; flex-direction: column; gap: 48px; }
+  .intro { max-width: 62ch; color: var(--ink-muted); }
+  .label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
+  .card { background: var(--surface); border-radius: 32px; padding: 32px; }
+  section { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Wordmark: lowercase Bricolage 800. The dot of the i is the mark: a dot with one tail. */
+  .wordmark { display: inline-flex; align-items: baseline; font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; line-height: 1; letter-spacing: -0.035em; color: var(--ink); }
+  .wordmark .i { position: relative; display: inline-block; }
+  .wordmark .i svg { position: absolute; left: 50%; top: -0.05em; width: 0.6em; height: 0.4em; transform: translateX(-27%); overflow: visible; }
+  .brand { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 32px; min-height: 560px; }
+  .brand .wordmark { font-size: clamp(88px, 14vw, 176px); position: relative; z-index: 1; }
+  .brand .descriptor { font-size: 20px; line-height: 30px; font-weight: 500; color: var(--ink-muted); position: relative; z-index: 1; }
+  .brand .pebbles { position: absolute; right: -60px; top: -40px; width: 560px; max-width: 70%; height: auto; z-index: 0; }
+  .claims { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 16px; max-width: 640px; padding: 24px; border-radius: 24px; background: var(--tint); }
+  .claim { display: flex; align-items: center; gap: 16px; }
+  .lang { flex: none; display: inline-flex; justify-content: center; min-width: 44px; padding: 4px 10px; border-radius: 999px; background: var(--surface); font-size: 13px; font-weight: 700; }
+  .claim span:last-child { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; font-size: clamp(20px, 3vw, 28px); line-height: 1.2; }
+  .lockup { position: relative; z-index: 1; align-self: flex-end; width: 360px; max-width: 100%; border-radius: 32px; padding: 28px 32px; background: var(--forest); display: flex; flex-direction: column; gap: 24px; }
+  .lockup .wordmark { font-size: 72px; color: var(--forest-ink); }
+  .lockup p { font-size: 13px; font-weight: 500; color: var(--forest-muted); }
+
+  /* Homi */
+  .homi-top { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; }
+  .homi-text { flex: 1 1 360px; display: flex; flex-direction: column; gap: 16px; }
+  .homi-text h2 { font-size: clamp(72px, 10vw, 120px); font-weight: 800; letter-spacing: -0.03em; }
+  .homi-text p { font-size: 20px; line-height: 30px; font-weight: 500; max-width: 34ch; }
+  .homi-hero { flex: 0 1 380px; width: 380px; max-width: 100%; height: auto; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .zone-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: 999px; font-size: 14px; font-weight: 700; color: var(--on-bright); }
+  .zone-chip svg { width: 16px; height: 16px; }
+  .zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; }
+  .zone { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .zone svg.homi { width: 150px; height: 155px; }
+
+  /* Homi's parts take their colour from custom properties (inherited into the <use> copies), so one drawing serves every state. */
+  svg.homi { overflow: visible; }
+  .homi { --body: var(--pulse); --hand: var(--reach); --thumb: var(--hand); --foot: var(--ground); --foot-l: var(--foot); --hand-l: var(--hand); --thumb-l: var(--hand-l); --open: 1; --closed: 0; --arc: 0; }
+
+  /* Phones */
+  .screens { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .shot { margin: 0; display: flex; flex-direction: column; gap: 12px; width: 360px; max-width: 100%; }
+  .phone { position: relative; height: 780px; border-radius: 44px; overflow: hidden; background: var(--tint); box-shadow: inset 0 0 0 1px var(--line); }
+  .lead { position: relative; z-index: 2; padding: 32px 24px 0; display: flex; flex-direction: column; gap: 10px; }
+  .lead .wordmark { font-size: 24px; letter-spacing: -0.02em; }
+  .lead h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; margin-top: 18px; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; background: var(--surface); border-radius: 32px 32px 0 0; padding: 24px 16px 110px; display: flex; flex-direction: column; gap: 16px; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .row h2 { font-size: 28px; font-weight: 700; }
+  .round { display: grid; place-items: center; width: 72px; height: 72px; flex: none; border: 0; border-radius: 999px; background: var(--pulse); color: var(--on-bright); }
+  .round svg { width: 26px; height: 26px; }
+  .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .day { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-muted); }
+  .day i { display: block; width: 30px; height: 30px; border-radius: 999px; box-shadow: inset 0 0 0 2px var(--line); }
+  .day.done i { background: var(--pulse); box-shadow: none; }
+  .day.today { color: var(--ink); font-weight: 700; }
+  .day.today i { box-shadow: inset 0 0 0 2px var(--ink); }
+  .tabs { position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 4; height: 64px; border-radius: 999px; background: #1f2a22; color: #fbf8f3; display: flex; justify-content: space-around; align-items: center; }
+  .tabs span { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; }
+  .tabs span.on { background: var(--pulse); color: var(--on-bright); }
+  .tabs svg { width: 22px; height: 22px; }
+  .bar-row { display: grid; grid-template-columns: 36px minmax(0, 1fr) 44px; align-items: center; gap: 4px 12px; }
+  .bar-row .dot { grid-row: span 2; width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center; color: var(--on-bright); }
+  .bar-row .dot svg { width: 16px; height: 16px; }
+  .bar-row .name { font-size: 14px; line-height: 20px; font-weight: 700; }
+  .bar-row .val { grid-row: span 2; font-size: 13px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+  .bar-row .track { height: 12px; border-radius: 999px; background: var(--line); overflow: hidden; }
+  .bar-row .track b { display: block; height: 100%; border-radius: 999px; }
+
+  /* Icons */
+  .icons { display: flex; flex-wrap: wrap; gap: 32px; }
+  .icons figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; }
+  .icons figure > svg { width: 168px; height: 168px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <defs>
+    <!-- The mark: a slightly uneven dot with one tail, as a neuron sends a signal. -->
+    <symbol id="mark" viewBox="0 0 60 40" overflow="visible">
+      <path d="M24 20 C32 10 44 5 57 7" stroke="#6fc08f" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M16 13 C24 13 29 19 28.5 26.5 C28 33 23 38.5 15.5 38 C8.5 37.5 3.5 32 4 25.5 C4.5 18.5 9 13 16 13 Z" fill="#6fc08f"/>
+    </symbol>
+    <!-- Homi: Buddy's pebble and face, with loose hands and feet. Colours come from the .homi custom properties. -->
+    <symbol id="homi" viewBox="0 0 300 310">
+      <path style="opacity: var(--arc)" d="M 70 300 Q 150 284 230 300" stroke="#7d9fd9" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <ellipse style="fill: var(--hand)" cx="24" cy="156" rx="24" ry="30" transform="rotate(-18 24 156)"/>
+      <circle style="fill: var(--thumb)" cx="38" cy="126" r="9"/>
+      <ellipse style="fill: var(--hand-l)" cx="276" cy="156" rx="24" ry="30" transform="rotate(18 276 156)"/>
+      <circle style="fill: var(--thumb-l)" cx="262" cy="126" r="9"/>
+      <ellipse style="fill: var(--foot)" cx="114" cy="272" rx="34" ry="17"/>
+      <ellipse style="fill: var(--foot-l)" cx="186" cy="272" rx="34" ry="17"/>
+      <path style="fill: var(--body)" d="M 150 40 C 198 40 252 76 254 138 C 256 200 216 242 150 242 C 88 242 46 204 48 136 C 50 76 102 40 150 40 Z"/>
+      <g style="opacity: var(--open)">
+        <circle cx="114" cy="132" r="10" fill="#1f2a22"/>
+        <circle cx="186" cy="132" r="10" fill="#1f2a22"/>
+        <circle cx="117" cy="128" r="3" fill="#fbf8f3"/>
+        <circle cx="189" cy="128" r="3" fill="#fbf8f3"/>
+      </g>
+      <g style="opacity: var(--closed)" stroke="#1f2a22" stroke-width="5" stroke-linecap="round" fill="none">
+        <path d="M 104 134 Q 114 142 124 134"/>
+        <path d="M 176 134 Q 186 142 196 134"/>
+      </g>
+      <circle cx="92" cy="160" r="10" fill="#ef8f7e" opacity="0.45"/>
+      <circle cx="208" cy="160" r="10" fill="#ef8f7e" opacity="0.45"/>
+      <path d="M 130 166 Q 150 182 170 166" stroke="#1f2a22" stroke-width="5" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="i-breath" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-balance" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-reach" viewBox="0 0 24 24"><path d="M5 15 Q12 6 19 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-ground" viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.5" fill="currentColor"/><path d="M7 18 Q12 13 17 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-rest" viewBox="0 0 24 24"><path d="M15 5a7 7 0 1 0 4 11 6 6 0 0 1-4-11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bars" viewBox="0 0 24 24"><path d="M7 18v-5M12 18V8M17 18v-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.5 19.5c1.2-3.2 3.7-4.8 6.5-4.8s5.3 1.6 6.5 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <linearGradient id="fill-hand" x1="0" y1="1" x2="0" y2="0"><stop offset="0.6" stop-color="#ef8f7e"/><stop offset="0.6" stop-color="#e6dfd2"/></linearGradient>
+    <linearGradient id="fill-foot" x1="0" y1="0" x2="1" y2="0"><stop offset="0.4" stop-color="#f4b860"/><stop offset="0.4" stop-color="#e6dfd2"/></linearGradient>
+  </defs>
+</svg>
+
+<main class="wrap">
+  <p class="intro">Naming draft, not decided. <strong>propria</strong> is the brand, from Latin <em>proprius</em>, one's own: your own body, senses and pace, with proprioception as the way in. <strong>Homi</strong> is the character who guides the exercises. Homi grows out of Buddy, with loose hands and feet as a nod to the sensory homunculus. Everything uses the tokens in <code>tokens.json</code>.</p>
+
+  <section aria-labelledby="s-brand">
+    <p class="label" id="s-brand">1 · Wortmarke und Claim</p>
+    <div class="card brand">
+      <svg class="pebbles" viewBox="0 0 620 560" aria-hidden="true">
+        <path d="M380 40 C470 40 600 150 600 250 C600 350 480 470 380 470 C280 470 160 360 160 250 C160 150 290 40 380 40 Z" fill="#6fc08f"/>
+        <path d="M110 300 C150 300 182 322 182 372 C182 420 152 452 112 452 C72 452 40 424 40 376 C40 330 70 300 110 300 Z" fill="#ef8f7e"/>
+        <path d="M60 96 C100 80 150 84 196 110" stroke="#f4b860" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M214 98 C228 98 240 112 240 124 C240 138 226 150 214 150 C200 150 188 136 188 124 C188 110 200 98 214 98 Z" fill="#f4b860"/>
+      </svg>
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <span class="wordmark" role="img" aria-label="propria"><span aria-hidden="true">propr</span><span class="i" aria-hidden="true">ı<svg><use href="#mark"/></svg></span><span aria-hidden="true">a</span></span>
+        <p class="descriptor">Sensomotorisches Heimtraining, neurologisch begleitet.</p>
+      </div>
+      <div class="claims">
+        <p class="claim"><span class="lang">DE</span><span>Dein Körper. Deine Sinne. Dein Tempo.</span></p>
+        <p class="claim"><span class="lang">FR</span><span>Ton corps. Tes sens. Ton rythme.</span></p>
+        <p class="claim"><span class="lang">IT</span><span>Il tuo corpo. I tuoi sensi. Il tuo ritmo.</span></p>
+      </div>
+      <div class="lockup">
+        <span class="wordmark" role="img" aria-label="propria, dunkle Version"><span aria-hidden="true">propr</span><span class="i" aria-hidden="true">ı<svg><use href="#mark"/></svg></span><span aria-hidden="true">a</span></span>
+        <p>Dunkel · Wald statt Schwarz</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-homi">
+    <p class="label" id="s-homi">2 · Homi</p>
+    <div class="card" style="display: flex; flex-direction: column; gap: 32px">
+      <div class="homi-top">
+        <div class="homi-text">
+          <h2>Homi</h2>
+          <p>Homi begleitet dich durch jede Übung. Klein und rund, mit grossen Händen und Füssen – wie die Körperkarte im Gehirn.</p>
+          <div class="chips">
+            <span class="zone-chip" style="background: var(--reach)"><svg aria-hidden="true"><use href="#i-reach"/></svg>Hände: Greifen</span>
+            <span class="zone-chip" style="background: var(--ground)"><svg aria-hidden="true"><use href="#i-ground"/></svg>Füsse: Boden</span>
+            <span class="zone-chip" style="background: var(--pulse)"><svg aria-hidden="true"><use href="#i-breath"/></svg>Körper: Puls, nimmt die Zone an</span>
+          </div>
+        </div>
+        <svg class="homi homi-hero" viewBox="0 0 300 310" role="img" aria-label="Homi: ein runder grüner Kiesel mit freundlichem Gesicht, grossen korallfarbenen Händen und gelben Füssen"><use href="#homi"/></svg>
+      </div>
+      <div class="zones">
+        <div class="zone">
+          <svg class="homi" viewBox="0 0 300 310" style="--body: var(--breath); --hand: #e6dfd2; --foot: #e6dfd2" role="img" aria-label="Homi in der Zone Atem: der ganze Körper türkis"><use href="#homi"/></svg>
+          <span class="zone-chip" style="background: var(--breath)"><svg aria-hidden="true"><use href="#i-breath"/></svg>Atem</span>
+        </div>
+        <div class="zone">
+          <svg class="homi" viewBox="0 0 300 310" style="--body: var(--balance); --hand: #e6dfd2; --foot: #e6dfd2; --arc: 1; transform: rotate(-7deg)" role="img" aria-label="Homi in der Zone Gleichgewicht: blau, leicht geneigt über einem Bogen"><use href="#homi"/></svg>
+          <span class="zone-chip" style="background: var(--balance)"><svg aria-hidden="true"><use href="#i-balance"/></svg>Gleichgewicht</span>
+        </div>
+        <div class="zone">
+          <svg class="homi" viewBox="0 0 300 310" style="--foot: #e6dfd2" role="img" aria-label="Homi in der Zone Greifen: die Hände leuchten koralle"><use href="#homi"/></svg>
+          <span class="zone-chip" style="background: var(--reach)"><svg aria-hidden="true"><use href="#i-reach"/></svg>Greifen</span>
+        </div>
+        <div class="zone">
+          <svg class="homi" viewBox="0 0 300 310" style="--hand: #e6dfd2" role="img" aria-label="Homi in der Zone Boden: die Füsse leuchten gelb"><use href="#homi"/></svg>
+          <span class="zone-chip" style="background: var(--ground)"><svg aria-hidden="true"><use href="#i-ground"/></svg>Boden</span>
+        </div>
+        <div class="zone">
+          <svg class="homi" viewBox="0 0 300 310" style="--body: var(--rest); --hand: #e6dfd2; --foot: #e6dfd2; --open: 0; --closed: 1" role="img" aria-label="Homi in der Zone Loslassen: lila, mit geschlossenen Augen"><use href="#homi"/></svg>
+          <span class="zone-chip" style="background: var(--rest)"><svg aria-hidden="true"><use href="#i-rest"/></svg>Loslassen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-screens">
+    <p class="label" id="s-screens">3 · Screens</p>
+    <div class="screens">
+      <figure class="shot">
+        <figcaption class="label">Heute</figcaption>
+        <div class="phone">
+          <div class="lead">
+            <span class="wordmark" role="img" aria-label="propria"><span aria-hidden="true">propr</span><span class="i" aria-hidden="true">ı<svg><use href="#mark"/></svg></span><span aria-hidden="true">a</span></span>
+            <h1>Guten Morgen, Anna.</h1>
+            <p>Heute: Greifen. Etwa zehn Minuten.</p>
+          </div>
+          <svg class="homi" viewBox="0 0 300 310" style="position: absolute; right: -36px; top: 210px; width: 230px; height: 238px; z-index: 1; --foot: #e6dfd2" role="img" aria-label="Homi mit leuchtenden Händen"><use href="#homi"/></svg>
+          <div class="sheet">
+            <span class="zone-chip" style="background: var(--reach); align-self: flex-start"><svg aria-hidden="true"><use href="#i-reach"/></svg>Greifen</span>
+            <div class="row">
+              <div>
+                <h2>Münze ertasten</h2>
+                <p style="font-size: 14px; color: var(--ink-muted)">8 Minuten · im Sitzen</p>
+              </div>
+              <span class="round" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+            </div>
+            <div class="days">
+              <span class="day done"><i></i>Mo</span><span class="day done"><i></i>Di</span><span class="day"><i></i>Mi</span><span class="day done"><i></i>Do</span><span class="day"><i></i>Fr</span><span class="day today"><i></i>Sa</span><span class="day"><i></i>So</span>
+            </div>
+          </div>
+          <div class="tabs" aria-hidden="true">
+            <span class="on"><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-balance"/></svg></span><span><svg><use href="#i-bars"/></svg></span><span><svg><use href="#i-user"/></svg></span>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="shot">
+        <figcaption class="label">Verlauf · Homis Körperkarte</figcaption>
+        <div class="phone">
+          <div class="lead">
+            <p class="label">Woche 3</p>
+            <h1 style="margin-top: 0">Da bist du wieder.</h1>
+            <p>Vier Einheiten diese Woche.</p>
+          </div>
+          <svg class="homi" viewBox="0 0 300 310" style="display: block; margin: 8px auto 0; width: 210px; height: 217px; --hand: url(#fill-hand); --thumb: #e6dfd2; --foot: url(#fill-foot); --hand-l: var(--reach); --foot-l: var(--ground)" role="img" aria-label="Homis Körperkarte: rechte Hand zu 60 Prozent gefüllt, rechter Fuss zu 40 Prozent, die linke Seite voll"><use href="#homi"/></svg>
+          <div class="sheet" style="gap: 14px">
+            <h2 style="font-size: 22px; font-weight: 700">Deine Selbsteinschätzung</h2>
+            <div class="bar-row"><span class="dot" style="background: var(--reach)"><svg aria-hidden="true"><use href="#i-reach"/></svg></span><span class="name">Gefühl Hand</span><span class="val">6/10</span><span class="track"><b style="width: 60%; background: var(--reach)"></b></span></div>
+            <div class="bar-row"><span class="dot" style="background: var(--reach)"><svg aria-hidden="true"><use href="#i-reach"/></svg></span><span class="name">Präzision Hand</span><span class="val">5/10</span><span class="track"><b style="width: 50%; background: var(--reach)"></b></span></div>
+            <div class="bar-row"><span class="dot" style="background: var(--ground)"><svg aria-hidden="true"><use href="#i-ground"/></svg></span><span class="name">Gefühl Bein</span><span class="val">4/10</span><span class="track"><b style="width: 40%; background: var(--ground)"></b></span></div>
+            <div class="bar-row"><span class="dot" style="background: var(--balance)"><svg aria-hidden="true"><use href="#i-balance"/></svg></span><span class="name">Sicherheit beim Gehen</span><span class="val">7/10</span><span class="track"><b style="width: 70%; background: var(--balance)"></b></span></div>
+          </div>
+          <div class="tabs" aria-hidden="true">
+            <span><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-balance"/></svg></span><span class="on"><svg><use href="#i-bars"/></svg></span><span><svg><use href="#i-user"/></svg></span>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-icons">
+    <p class="label" id="s-icons">4 · App-Icon</p>
+    <div class="icons">
+      <figure>
+        <svg viewBox="0 0 168 168" role="img" aria-label="Icon: grüner Punkt mit Schweif auf Papierweiss">
+          <rect x="1" y="1" width="166" height="166" rx="38" fill="#fbf8f3" stroke="#e6dfd2" stroke-width="2"/>
+          <path d="M86 78 C100 56 118 46 138 46" stroke="#6fc08f" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M70 62 C92 62 106 78 105 98 C104 117 90 130 69 129 C50 128 36 114 37 95 C38 76 50 62 70 62 Z" fill="#6fc08f"/>
+        </svg>
+        <figcaption>Zeichen hell</figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 168 168" role="img" aria-label="Icon: Homi auf warmem Grund">
+          <rect width="168" height="168" rx="38" fill="#f3efe7"/>
+          <svg class="homi" x="19" y="22" width="130" height="134" viewBox="0 0 300 310"><use href="#homi"/></svg>
+        </svg>
+        <figcaption>Homi</figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 168 168" role="img" aria-label="Icon: grüner Punkt mit Schweif auf Waldgrün">
+          <rect width="168" height="168" rx="38" fill="#121a16"/>
+          <path d="M86 78 C100 56 118 46 138 46" stroke="#7fd1a0" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M70 62 C92 62 106 78 105 98 C104 117 90 130 69 129 C50 128 36 114 37 95 C38 76 50 62 70 62 Z" fill="#6fc08f"/>
+        </svg>
+        <figcaption>Zeichen dunkel</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+</body>
+</html>
