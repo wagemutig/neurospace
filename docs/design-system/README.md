@@ -1,3 +1,5 @@
+![neurospace cover: imperfect circles in the signature green and zone colours](cover.png)
+
 # neurospace
 
 > Dein Körper. Wieder deiner. – Ton corps, à nouveau à toi. – Il tuo corpo, di nuovo tuo.

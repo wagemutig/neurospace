@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=DM+Sans:wght@500&display=swap">
 <style>
+  :root { --paper: #fbf8f3; --ink: #1f2a22; --ink-muted: #5a655c; --pulse: #6fc08f; --reach: #ef8f7e; --rest: #a998de; --ground: #f4b860; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #121a16; --ink: #f1ede4; --ink-muted: #a9b5aa; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --paper: #121a16; --ink: #f1ede4; --ink-muted: #a9b5aa; color-scheme: dark; }
   html, body { margin: 0; background: var(--paper); }
   body { width: 960px; height: 360px; overflow: hidden; }
   svg { display: block; }
