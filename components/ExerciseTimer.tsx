@@ -26,7 +26,7 @@ export function ExerciseTimer() {
 
   return (
     <>
-      <div className="timer" role="timer" aria-live="off">
+      <div className={`timer${active ? " is-running" : ""}`} role="timer" aria-live="off">
         <svg viewBox="0 0 240 240" aria-hidden="true">
           <path d={OUTLINE} fill="var(--surface)" />
           <path
