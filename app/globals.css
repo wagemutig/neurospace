@@ -389,6 +389,138 @@ a {
   height: 22px;
 }
 
+/*
+ * Motion. Slow and springy, 250–400ms per the design system, with a soft
+ * float and breath where the screen should feel calm. Everything below is
+ * switched off by the reduced-motion query at the end of this file.
+ */
+:root {
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+/* Screen and content entrances, each one a little after the last. */
+.screen {
+  animation: fade-in 400ms ease both;
+}
+
+.lead {
+  animation: rise 600ms var(--ease-out) 80ms both;
+}
+
+.sheet {
+  animation: sheet-up 600ms var(--ease-out) 160ms both;
+}
+
+.controls {
+  animation: rise 500ms var(--ease-out) 260ms both;
+}
+
+/* Pebble drifts slowly, like something breathing in the room. */
+.pebble {
+  animation: float 9s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Buttons press in and spring back. Hover lift only where hover exists. */
+.round,
+.pill,
+.tabs a {
+  transition:
+    transform 300ms var(--ease-spring),
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+.round:active,
+.pill:active,
+.tabs a:active {
+  transform: scale(0.92);
+}
+
+@media (hover: hover) {
+  .round:hover:not(:disabled),
+  .pill:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+}
+
+.pill:hover:not(:disabled) {
+  filter: brightness(1.04);
+}
+
+/* Week dots pop in one after another when a day is done. */
+.day.done i {
+  animation: pop 450ms var(--ease-spring) both;
+}
+
+.day i {
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* Timer: the shape drains smoothly and breathes while it runs. */
+.timer svg path:last-child {
+  transition: clip-path 1s linear;
+}
+
+.timer.is-running {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Progress bars grow from the left when the screen opens. */
+.track b {
+  transform-origin: left center;
+  animation: grow 900ms var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

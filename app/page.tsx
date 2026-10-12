@@ -65,13 +65,13 @@ export default function TodayPage() {
         </div>
 
         <div className="days" role="list">
-          {days.map((day) => (
+          {days.map((day, index) => (
             <div
               key={day.label}
               role="listitem"
               className={`day${day.done ? " done" : ""}${day.today ? " today" : ""}`}
             >
-              <i />
+              <i style={{ animationDelay: `${320 + index * 70}ms` }} />
               {day.label}
             </div>
           ))}
