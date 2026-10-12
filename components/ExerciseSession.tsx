@@ -5,6 +5,7 @@ import { Button, ButtonLink } from "@/components/Button";
 import { Buddy, type Mood } from "@/components/Buddy";
 import { ZoneChip } from "@/components/ZoneChip";
 import type { Exercise } from "@/lib/exercises";
+import { recordSession } from "@/app/actions";
 import { addSession, isSameDay } from "@/lib/progress";
 import { useSessions } from "@/lib/useSessions";
 import { levelOf, requestMotionAccess, startMotion, type Level, type Snapshot } from "@/lib/sensing";
@@ -61,11 +62,19 @@ export function ExerciseSession({ exercise, position, total, nextHref }: Props) 
   // Record the session once each time the timer reaches zero, and give a short buzz where supported.
   useEffect(() => {
     if (!finished) return;
+    const completedAt = new Date().toISOString();
     addSession({
       exerciseId: exercise.id,
       zone: exercise.zone,
       seconds: exercise.seconds,
-      completedAt: new Date().toISOString(),
+      completedAt,
+    });
+    // Also kept on the account when signed in. Stays a no-op otherwise.
+    void recordSession({
+      exerciseId: exercise.id,
+      zone: exercise.zone,
+      seconds: exercise.seconds,
+      completedAt,
     });
     navigator.vibrate?.(30);
   }, [finished, exercise.id, exercise.zone, exercise.seconds]);
